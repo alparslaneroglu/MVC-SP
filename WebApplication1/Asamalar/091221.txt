@@ -1,0 +1,8 @@
+﻿Önce HomeController oluşturduk.Sonra bunun view ını oluşturduk.
+Daha sonra homecontroller içerisini doldurmaya başladık.İlk önce public class book oluşturduk.Bu aslında arka tarafta create new table diyerek içerisindeki değişkenleri tanımlıyor.(Name,Id,Description gibi)
+Datetime tipi gereği null germez burda DateTime? yazarak null gelebilir hale gelmesini sağlıyoruz.Bunu ? işareti ile yapıyoruz.
+[Table("Books")] bunu controllerde yazarak database de oluşacak tablonun ismini veriyoruz.
+Sql de servername e (localdb)\mssqllocaldb yazıyoruz.Connectionstring belirlemediğimiz için local db üzerinde oluşturuyor.
+Webconfigde connectionstring oluşturduk.
+Sql de stored Procedures kısmından ınsert işlemine düzenleme yaptık.Eğer insert işlemini buradan gerçekleşiyorsa sonuna _deneme yazdık ve eğer bu yazarsa stored procedures kullanılıyor oluyor eğer database _deneme sonuna yazmıyorsa direkt olarak çalıştırıyor.
+MVC de prosedür ekleyip sql 'e gitmeye çalışıyoruz.
