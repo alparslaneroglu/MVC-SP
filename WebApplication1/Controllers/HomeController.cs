@@ -27,7 +27,10 @@ namespace WebApplication1.Controllers
             //};
             //db.Books.Add(book);
             //db.SaveChanges();
-            db.ExecuteInsertFakeData();
+            db.ExecuteInsertFakeData(); //Her çalıştığında kayıt ekliyor.
+            var result = db.ExecuteGetBooksByPublishDateSP(2000, 2004);
+            var result1 = db.GetBookInfos();
+            var result2 = db.GetBookInfos(4);
 
             return View();
         }
@@ -60,11 +63,34 @@ namespace WebApplication1.Controllers
             Database.ExecuteSqlCommand("EXEC InsertFakeDataSP");
 
         }
-        //public void ExecuteGetBooksByPublishDateSP(int startyear, int endyear)
-        //{
-        //    Database.ExecuteSqlCommand("EXEC ExecuteGetBooksByPublishDateSP @p0,@p1", startyear, endyear);
-        //}
+        public List<BookGroupByPublishDate> ExecuteGetBooksByPublishDateSP(int startyear, int endyear)
+        {
+            return
+            Database.SqlQuery<BookGroupByPublishDate>("EXEC GetBooksByPublishDateSP @p0,@p1", startyear, endyear).ToList();
+            //parametre göndermek için sqlquery ile yolluyoruz.
 
+        }
+
+        public List<BookInfo> GetBookInfos()
+        {
+            return Database.SqlQuery<BookInfo>("select * from GetBooksInfoVW").ToList();
+        }
+        public List<BookInfo> GetBookInfos(int bid)
+        {
+            return Database.SqlQuery<BookInfo>("select * from GetBooksInfoVW where Id=@p0", bid).ToList();
+        }
+        public class BookGroupByPublishDate
+        {
+            public int PublishDate { get; set; }
+            public int Count { get; set; }
+
+        }
+        public class BookInfo
+        {
+            public int Id { get; set; }
+            public string Info { get; set; }
+
+        }
     }
 
     public class DbInitializer : CreateDatabaseIfNotExists<DatabaseContext>

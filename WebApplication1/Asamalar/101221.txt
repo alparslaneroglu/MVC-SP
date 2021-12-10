@@ -1,0 +1,2 @@
+﻿ public List<BookGroupByPublishDate> ExecuteGetBooksByPublishDateSP(int startyear, int endyear) yapısını homecontrollerde oluşturduk.
+ daha sonra BookGroupByPublishDate hata verdiği için bunun classını oluşturduk aynı sayfada.
